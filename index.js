@@ -5,11 +5,11 @@ function getNode(elementName) {
 }
 
 const nodeNames = [
-    "appId",
-    "state",
-    "redirectUri",
-    "clientId",
-    "clientSecret"]
+    "appIdValue",
+    "stateValue",
+    "redirectUriValue",
+    "clientIdValue",
+    "clientSecretValue"]
 
 function onLoad() {
 
@@ -24,20 +24,24 @@ function onLoad() {
 
     submitButton.onclick = () => {
         // const url = `https://sellercentral.amazon.com/apps/authorize/consent?application_id=${localStorage.getItem("appId")}&state=${localStorage.getItem("state")}&version=beta`
-        const url = `https://sellercentral-europe.amazon.com/apps/authorize/consent?application_id=${localStorage.getItem("appId")}&state=${localStorage.getItem("state")}&version=beta`
+        const appId = localStorage.getItem("appIdValue");
+        const state = localStorage.getItem("stateValue");
+        console.log(appId, state);
+        const url = `https://sellercentral-europe.amazon.com/apps/authorize/consent?application_id=${appId}&state=${state}&version=beta`
         location.href = url;
     }
 
     const params = new URLSearchParams(location.search);
     const requiredParams = ["state", "selling_partner_id", "spapi_oauth_code"]
     if (requiredParams.every(param => params.has(param))) {
-        if (params.get("state") === localStorage.getItem("state")) {
+        if (params.get("state") === localStorage.getItem("stateValue")) {
             const sellerId = params.get("selling_partner_id");
 
             const code = params.get("spapi_oauth_code");
-            const redirectUri = localStorage.getItem("redirectUri");
-            const clientId = localStorage.getItem("clientId");
-            const clientSecret = localStorage.getItem("clientSecret");
+            const redirectUri = localStorage.getItem("redirectUriValue");
+            const clientId = localStorage.getItem("clientIdValue");
+            const clientSecret = localStorage.getItem("clientSecretValue");
+            console.log(code, redirectUri, clientId, clientSecret);
             const url = `https://api.amazon.com/auth/o2/token?grant_type=authorization_code&code=${code}&redirect_uri=${redirectUri}&client_id=${clientId}&client_secret=${clientSecret}`;
 
             const http = new XMLHttpRequest();
