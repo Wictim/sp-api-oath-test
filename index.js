@@ -5,8 +5,8 @@ function getNode(elementName) {
 }
 
 const nodeNames = [
-    "appIdInput",
-    "stateInput",
+    "appId",
+    "state",
     "redirectUri",
     "clientId",
     "clientSecret"]
