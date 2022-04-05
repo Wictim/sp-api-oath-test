@@ -69,3 +69,87 @@ function onLoad() {
 
 }
 
+/*
+
+NOTES:
+
+1)
+click -> auth url (redirect_uri, state) // state = temporary token (5m TTL)
+
+	https://sellercentral.amazon.com/apps/authorize/consent?application_id=appidexample&state=stateexample&version=beta
+	OR
+	https://sellercentral.amazon.com/apps/authorize/consent?application_id=appidexample&state=stateexample
+
+2)
+
+user stuff on seller central
+
+3)
+
+-> redirect uri?state=W&selling_partner_id=X&mws_auth_token=Y&spapi_oauth_code=Z
+
+	find doc by state
+	save spID, mws auth token (idk why), sp api oauth code
+
+4)
+
+eve
+-> https://api.amazon.com/auth/o2/token?grant_type=authorization_code&code={W}&redirect_uri={X}&client_id={Y}&client_secret={Z}
+
+	W is from 3)
+	X is our URL
+	Y is from our creds
+	Z is from our creds
+
+ <-
+
+in JSON body:
+	access_token
+	token_type
+	expires_in
+	refresh_token
+
+save refresh_token
+
+show user that it succeeded
+
+-------------------------------------
+
+auth urls - https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/developer-guide/SellingPartnerApiDeveloperGuide.md#Seller-Central-URLs
+
+Seller Central URLs
+For seller applications only
+
+Here are the Seller Central URLs by marketplace.
+
+North America
+
+Marketplace	Seller Central URL
+Canada		https://sellercentral.amazon.ca
+US		    https://sellercentral.amazon.com
+Mexico		https://sellercentral.amazon.com.mx
+Brazil		https://sellercentral.amazon.com.br
+
+Europe
+
+Marketplace	Seller Central URL
+Spain		https://sellercentral-europe.amazon.com
+UK		    https://sellercentral-europe.amazon.com
+France		https://sellercentral-europe.amazon.com
+Netherlands	https://sellercentral.amazon.nl
+Germany	    https://sellercentral-europe.amazon.com
+Italy		https://sellercentral-europe.amazon.com
+Sweden		https://sellercentral.amazon.se
+Poland		https://sellercentral.amazon.pl
+Turkey		https://sellercentral.amazon.com.tr
+U.A.E.		https://sellercentral.amazon.ae
+India		https://sellercentral.amazon.in
+
+Far East
+
+Marketplace	Seller Central URL
+Singapore	https://sellercentral.amazon.sg
+Australia	https://sellercentral.amazon.com.au
+Japan		https://sellercentral.amazon.co.jp
+* */
+
