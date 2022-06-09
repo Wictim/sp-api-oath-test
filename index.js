@@ -5,11 +5,13 @@ function getNode(elementName) {
 }
 
 const nodeNames = [
+    "amazonAuthUrl",
     "appIdValue",
     "stateValue",
     "redirectUriValue",
     "clientIdValue",
-    "clientSecretValue"]
+    "clientSecretValue"
+]
 
 function onLoad() {
 
@@ -24,10 +26,11 @@ function onLoad() {
 
     submitButton.onclick = () => {
         // const url = `https://sellercentral.amazon.com/apps/authorize/consent?application_id=${localStorage.getItem("appId")}&state=${localStorage.getItem("state")}&version=beta`
+        const authUrl = localStorage.getItem("amazonAuthUrl");
         const appId = localStorage.getItem("appIdValue");
         const state = localStorage.getItem("stateValue");
         console.log(appId, state);
-        const url = `https://sellercentral-europe.amazon.com/apps/authorize/consent?application_id=${appId}&state=${state}&version=beta`
+        const url = `${authUrl}/apps/authorize/consent?application_id=${appId}&state=${state}&version=beta`
         location.href = url;
     }
 
